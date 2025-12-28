@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AAGMAN INSTITUTE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ========== GLOBAL ========== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
+body{
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+overflow-x:hidden;
+}
+button{cursor:pointer}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
+}
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.05)}
+100%{transform:scale(1)}
+}
+
+/* ========== NAVBAR ========== */
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 8%;
+background:rgba(0,0,0,0.6);
+position:sticky;
+top:0;
+z-index:1000;
+}
+nav strong{font-size:18px}
+nav button{
+background:#00ffd5;
+border:none;
+padding:8px 16px;
+border-radius:20px;
+font-weight:bold;
+}
+
+/* ========== SECTION CONTROL ========== */
+section{
+padding:80px 8%;
+display:none;
+animation:fadeUp .6s ease;
+}
+section.active{display:block}
+
+/* ========== HERO ========== */
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:40px;
+}
+.hero h1 span{color:#00ffd5}
+.hero button{margin-top:20px}
+
+/* LOGO */
+.logo{
+width:170px;height:170px;
+border-radius:50%;
+background:#00ffd5;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+color:#0f2027;
+font-weight:bold;
+animation:pulse 4s infinite;
+}
+.logo div:first-child{font-size:52px}
+.logo div:last-child{font-size:14px}
+
+/* ========== CARDS ========== */
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:20px;
+margin-top:30px;
+}
+.card{
+background:rgba(255,255,255,0.12);
+padding:25px;
+border-radius:18px;
+transition:.3s;
+}
+.card:hover{
+transform:translateY(-8px);
+background:rgba(0,255,213,0.25);
+}
+
+/* ========== FORM ========== */
+form{
+max-width:420px;
+background:rgba(255,255,255,0.12);
+padding:30px;
+border-radius:20px;
+}
+input,select{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:none;
+border-radius:8px;
+}
+
+/* ========== DASHBOARD DETAIL BOX ========== */
+.detail{
+margin-top:30px;
+background:rgba(255,255,255,0.12);
+padding:25px;
+border-radius:18px;
+}
+
+/* ========== CHATBOT ========== */
+#chatToggle{
+position:fixed;
+bottom:20px;right:20px;
+width:55px;height:55px;
+background:#00ffd5;
+border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-size:24px;color:#000;
+z-index:9999;
+}
+.chatbot{
+position:fixed;
+bottom:90px;right:20px;
+width:300px;
+background:#111;
+border-radius:15px;
+overflow:hidden;
+z-index:9999;
+}
+.chatbot.hidden{display:none}
+.chat-header{
+background:#00ffd5;color:black;
+padding:10px;
+display:flex;justify-content:space-between;
+}
+.chat-body{height:200px;padding:10px;overflow-y:auto}
+.chat-input{display:flex}
+.chat-input input{flex:1;padding:8px;border:none}
+.chat-input button{background:#00ffd5;border:none;padding:8px}
+/* ===== PROGRESS GRAPH ===== */
+.progress-container{
+    margin-top:25px;
+}
+.progress-item{
+    margin-bottom:18px;
+}
+.progress-item span{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:6px;
+    font-size:14px;
+}
+.progress-bar{
+    width:100%;
+    height:14px;
+    background:#333;
+    border-radius:20px;
+    overflow:hidden;
+}
+.progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,#00ffd5,#00bfa6);
+    border-radius:20px;
+    width:0;
+    transition:width 1s ease;
+}
+
+/* overall score box */
+.overall-score{
+    margin-top:25px;
+    padding:20px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.12);
+    text-align:center;
+    font-size:18px;
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+<strong>AAGMAN INSTITUTE</strong>
+<div id="navBtns">
+<button onclick="show('login')">Login</button>
+<button onclick="logout()">Logout</button>
+</div>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="active">
+<div class="hero">
+<div>
+<h1>Welcome to <span>AAGMAN INSTITUTE</span></h1>
+<p>Interactive Smart Learning for Class 5–12 | CBSE & GSEB</p>
+</div>
+<div class="logo">
+<div>A</div>
+<div>AAGMAN</div>
+</div>
+</div>
+</section>
+
+<!-- ABOUT + FACULTY + STATS -->
+<section id="about" class="active">
+
+    <!-- ABOUT US -->
+    <h2>About AAGMAN INSTITUTE</h2>
+    <p style="margin:20px 0; max-width:800px">
+        <strong>AAGMAN INSTITUTE</strong> is a modern, technology-driven education
+        platform designed for students from <b>Class 5 to Class 12</b> following
+        <b>CBSE and GSEB</b> curriculum.
+        <br><br>
+        Our mission is to deliver concept clarity, exam-oriented learning,
+        and continuous academic improvement through smart notes, interactive quizzes,
+        and AI-powered doubt solving.
+    </p>
+
+    <!-- FACULTY -->
+    <h2 style="margin-top:50px">Our Faculty</h2>
+    <div class="cards">
+
+        <div class="card">
+            👨‍🏫 <b>Shubham Vishwanath</b><br><br>
+            Subject: Mathematics<br>
+            Role: Academic Mentor
+        </div>
+
+        <div class="card">
+            👨‍🏫 <b>Tirth Kosambia</b><br><br>
+            Subject: Computer Science & AI<br>
+            Role: Technical Instructor
+        </div>
+
+        <div class="card">
+            👨‍🏫 <b>Shaswat Mistry</b><br><br>
+            Subject: Science<br>
+            Role: Subject Specialist
+        </div>
+
+        <div class="card">
+            👩‍🏫 <b>Ruchi Upadhyay</b><br><br>
+            Subject: English<br>
+            Role: Language Trainer
+        </div>
+
+        <div class="card">
+            👩‍🏫 <b>Jeni Patel</b><br><br>
+            Subject: Social Science<br>
+            Role: Academic Guide
+        </div>
+
+    </div>
+
+    <!-- INSTITUTE STATS -->
+    <h2 style="margin-top:60px">Institute Statistics</h2>
+    <div class="cards">
+
+        <div class="card">
+            🎓 <b>500+</b><br>
+            Students Enrolled
+        </div>
+
+        <div class="card">
+            📚 <b>50+</b><br>
+            Courses & Notes
+        </div>
+
+        <div class="card">
+            🤖 <b>1000+</b><br>
+            AI Doubts Solved
+        </div>
+
+        <div class="card">
+            ⭐ <b>95%</b><br>
+            Student Satisfaction
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LOGIN -->
+<section id="login">
+<h2>Login</h2>
+<form onsubmit="login(event)">
+<input id="email" placeholder="Email" required>
+<input id="password" type="password" placeholder="Password" required>
+<button>Login</button>
+</form>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard">
+<h2>Student Dashboard</h2>
+
+<div class="cards">
+<div class="card" onclick="loadClasses()">📚 My Classes</div>
+<div class="card" onclick="loadNotes()">📝 My Notes</div>
+<div class="card" onclick="loadQuizzes()">❓ My Quizzes</div>
+<div class="card" onclick="loadProgress()">📊 Progress</div>
+</div>
+
+<div id="detailBox" class="detail"></div>
+</section>
+
+<!-- ADMIN -->
+<section id="admin">
+<h2>Admin Panel</h2>
+<div class="cards">
+<div class="card">Manage Students</div>
+<div class="card">Manage Faculty</div>
+<div class="card">Upload Notes</div>
+<div class="card">Create Quizzes</div>
+</div>
+</section>
+
+<!-- CHATBOT -->
+<div id="chatToggle" onclick="toggleChat()">🤖</div>
+<div id="chatbot" class="chatbot hidden">
+<div class="chat-header">AI Doubt Solver <span onclick="toggleChat()">✖</span></div>
+<div class="chat-body" id="chatBody"></div>
+<div class="chat-input">
+<input id="chatInput" placeholder="Ask your doubt">
+<button onclick="sendMsg()">Send</button>
+</div>
+</div>
+
+<script>
+const detailBox=document.getElementById("detailBox");
+
+function show(id){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+function login(e){
+e.preventDefault();
+if(email.value==="student@aagman.com" && password.value==="1234"){
+show("dashboard");
+navBtns.innerHTML='<button onclick="logout()">Logout</button>';
+}else if(email.value==="admin@aagman.com" && password.value==="admin"){
+show("admin");
+navBtns.innerHTML='<button onclick="logout()">Logout</button>';
+}else alert("Invalid login");
+}
+
+function logout(){
+
+    // 1. Hide all sections
+    document.querySelectorAll("section").forEach(s => 
+        s.classList.remove("active")
+    );
+
+    // 2. Show Home section
+    document.getElementById("home").classList.add("active");
+
+    // 3. Reset navbar
+    document.getElementById("navBtns").innerHTML =
+        '<button onclick="show(`login`)">Login</button>';
+
+    // 4. Clear dashboard details (important)
+    if(typeof detailBox !== "undefined"){
+        detailBox.innerHTML = "";
+    }
+
+    // 5. Close chatbot if open
+    const bot = document.getElementById("chatbot");
+    if(bot && !bot.classList.contains("hidden")){
+        bot.classList.add("hidden");
+    }
+
+    // 6. Optional: clear login fields
+    const email = document.getElementById("email");
+    const pass = document.getElementById("password");
+    if(email) email.value = "";
+    if(pass) pass.value = "";
+}
+
+
+function loadClasses(){
+
+    const data = {
+        "6": {
+            subjects: ["Mathematics", "Science", "English", "Social Science"],
+            faculty: {
+                "Mathematics": "Shubham Vishwanath",
+                "Science": "Shaswat Mistry",
+                "English": "Ruchi Upadhyay",
+                "Social Science": "Jeni Patel"
+            }
+        },
+        "7": {
+            subjects: ["Mathematics", "Science", "English", "Social Science"],
+            faculty: {
+                "Mathematics": "Shubham Vishwanath",
+                "Science": "Shaswat Mistry",
+                "English": "Ruchi Upadhyay",
+                "Social Science": "Jeni Patel"
+            }
+        },
+        "8": {
+            subjects: ["Mathematics", "Science", "English", "Social Science"],
+            faculty: {
+                "Mathematics": "Shubham Vishwanath",
+                "Science": "Shaswat Mistry",
+                "English": "Ruchi Upadhyay",
+                "Social Science": "Jeni Patel"
+            }
+        },
+        "9": {
+            subjects: ["Mathematics", "Science", "English", "Social Science"],
+            faculty: {
+                "Mathematics": "Shubham Vishwanath",
+                "Science": "Shaswat Mistry",
+                "English": "Ruchi Upadhyay",
+                "Social Science": "Jeni Patel"
+            }
+        },
+        "10": {
+            subjects: ["Mathematics", "Science", "English", "Social Science"],
+            faculty: {
+                "Mathematics": "Shubham Vishwanath",
+                "Science": "Shaswat Mistry",
+                "English": "Ruchi Upadhyay",
+                "Social Science": "Jeni Patel"
+            }
+        },
+        "11": {
+            subjects: ["Physics", "Chemistry", "Mathematics", "Computer Science"],
+            faculty: {
+                "Physics": "Shaswat Mistry",
+                "Chemistry": "Shaswat Mistry",
+                "Mathematics": "Shubham Vishwanath",
+                "Computer Science": "Tirth Kosambia"
+            }
+        },
+        "12": {
+            subjects: ["Physics", "Chemistry", "Mathematics", "Computer Science"],
+            faculty: {
+                "Physics": "Shaswat Mistry",
+                "Chemistry": "Shaswat Mistry",
+                "Mathematics": "Shubham Vishwanath",
+                "Computer Science": "Tirth Kosambia"
+            }
+        }
+    };
+
+    detailBox.innerHTML = `
+        <h3>📚 My Classes</h3>
+
+        <label>Select Class</label>
+        <select id="classSelect" onchange="updateSubjects()">
+            <option value="">-- Select Class --</option>
+            <option value="6">Class 6</option>
+            <option value="7">Class 7</option>
+            <option value="8">Class 8</option>
+            <option value="9">Class 9</option>
+            <option value="10">Class 10</option>
+            <option value="11">Class 11</option>
+            <option value="12">Class 12</option>
+        </select>
+
+        <label style="margin-top:15px">Select Subject</label>
+        <select id="subjectSelect" onchange="updateFaculty()">
+            <option value="">-- Select Subject --</option>
+        </select>
+
+        <div id="facultyInfo" style="margin-top:20px;font-weight:bold"></div>
+    `;
+
+    window.classData = data;
+}
+
+
+function loadNotes(){
+
+    const notesData = {
+        "6": {
+            "Mathematics": ["Integers.pdf", "Fractions.pdf"],
+            "Science": ["Food & Nutrition.pdf"],
+            "English": ["Grammar Basics.pdf"],
+            "Social Science": ["History – Early Man.pdf"]
+        },
+        "7": {
+            "Mathematics": ["Algebra Intro.pdf"],
+            "Science": ["Heat & Energy.pdf"],
+            "English": ["Tenses.pdf"],
+            "Social Science": ["Geography – Earth.pdf"]
+        },
+        "8": {
+            "Mathematics": ["Linear Equations.pdf"],
+            "Science": ["Force & Pressure.pdf"],
+            "English": ["Essay Writing.pdf"],
+            "Social Science": ["Civics – Constitution.pdf"]
+        },
+        "9": {
+            "Mathematics": ["Polynomials.pdf"],
+            "Science": ["Motion.pdf"],
+            "English": ["Poetry.pdf"],
+            "Social Science": ["Democracy.pdf"]
+        },
+        "10": {
+            "Mathematics": ["Trigonometry.pdf"],
+            "Science": ["Light.pdf"],
+            "English": ["Letter Writing.pdf"],
+            "Social Science": ["Nationalism.pdf"]
+        },
+        "11": {
+            "Physics": ["Kinematics.pdf"],
+            "Chemistry": ["Atomic Structure.pdf"],
+            "Mathematics": ["Sets.pdf"],
+            "Computer Science": ["Python Basics.pdf"]
+        },
+        "12": {
+            "Physics": ["Electrostatics.pdf"],
+            "Chemistry": ["Organic Chemistry.pdf"],
+            "Mathematics": ["Integrals.pdf"],
+            "Computer Science": ["Data Structures.pdf"]
+        }
+    };
+
+    detailBox.innerHTML = `
+        <h3>📝 My Notes</h3>
+
+        <label>Select Class</label>
+        <select id="notesClass" onchange="updateNotesSubjects()">
+            <option value="">-- Select Class --</option>
+            ${[6,7,8,9,10,11,12].map(c=>`<option value="${c}">Class ${c}</option>`).join("")}
+        </select>
+
+        <label style="margin-top:15px">Select Subject</label>
+        <select id="notesSubject" onchange="showNotes()">
+            <option value="">-- Select Subject --</option>
+        </select>
+
+        <div id="notesList" style="margin-top:20px"></div>
+    `;
+
+    window.notesData = notesData;
+}
+function updateNotesSubjects(){
+    const cls = document.getElementById("notesClass").value;
+    const subSelect = document.getElementById("notesSubject");
+    subSelect.innerHTML = `<option value="">-- Select Subject --</option>`;
+
+    if(!cls) return;
+
+    Object.keys(notesData[cls]).forEach(sub=>{
+        subSelect.innerHTML += `<option value="${sub}">${sub}</option>`;
+    });
+
+    document.getElementById("notesList").innerHTML = "";
+}
+
+function showNotes(){
+    const cls = document.getElementById("notesClass").value;
+    const sub = document.getElementById("notesSubject").value;
+    if(!cls || !sub) return;
+
+    const list = notesData[cls][sub];
+    document.getElementById("notesList").innerHTML =
+        list.map(n=>`📄 ${n} <button style="margin-left:10px">Download</button>`).join("<br>");
+}
+
+
+function loadQuizzes(){
+
+    const quizData = {
+        "6": {
+            "Mathematics": {score:"8/10", status:"Completed"},
+            "Science": {score:"-", status:"Pending"}
+        },
+        "8": {
+            "Science": {score:"7/10", status:"Completed"}
+        },
+        "10": {
+            "Mathematics": {score:"9/10", status:"Completed"},
+            "Science": {score:"-", status:"Pending"}
+        },
+        "12": {
+            "Physics": {score:"6/10", status:"Completed"},
+            "Chemistry": {score:"-", status:"Pending"}
+        }
+    };
+
+    detailBox.innerHTML = `
+        <h3>❓ My Quizzes</h3>
+
+        <label>Select Class</label>
+        <select id="quizClass" onchange="updateQuizSubjects()">
+            <option value="">-- Select Class --</option>
+            ${Object.keys(quizData).map(c=>`<option value="${c}">Class ${c}</option>`).join("")}
+        </select>
+
+        <label style="margin-top:15px">Select Subject</label>
+        <select id="quizSubject" onchange="showQuiz()">
+            <option value="">-- Select Subject --</option>
+        </select>
+
+        <div id="quizInfo" style="margin-top:20px"></div>
+    `;
+
+    window.quizData = quizData;
+}
+function updateQuizSubjects(){
+    const cls = quizClass.value;
+    quizSubject.innerHTML = `<option value="">-- Select Subject --</option>`;
+    if(!cls) return;
+
+    Object.keys(quizData[cls]).forEach(sub=>{
+        quizSubject.innerHTML += `<option value="${sub}">${sub}</option>`;
+    });
+
+    quizInfo.innerHTML = "";
+}
+
+function showQuiz(){
+    const cls = quizClass.value;
+    const sub = quizSubject.value;
+    if(!cls || !sub) return;
+
+    const q = quizData[cls][sub];
+    quizInfo.innerHTML = `
+        <b>Subject:</b> ${sub}<br>
+        <b>Status:</b> ${q.status}<br>
+        <b>Score:</b> ${q.score}<br><br>
+        <button>Attempt / View Quiz</button>
+    `;
+}
+
+function loadProgress(){
+    detailBox.innerHTML = `
+        <h3>📊 Academic Progress</h3>
+
+        <div class="progress-container">
+
+            <div class="progress-item">
+                <span><b>Mathematics</b> <b>80%</b></span>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-value="80"></div>
+                </div>
+                <small>Status: Good performance</small>
+            </div>
+
+            <div class="progress-item">
+                <span><b>Science</b> <b>65%</b></span>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-value="65"></div>
+                </div>
+                <small>Status: Needs improvement</small>
+            </div>
+
+            <div class="progress-item">
+                <span><b>English</b> <b>75%</b></span>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-value="75"></div>
+                </div>
+                <small>Status: Satisfactory</small>
+            </div>
+
+            <div class="progress-item">
+                <span><b>Social Science</b> <b>60%</b></span>
+                <div class="progress-bar">
+                    <div class="progress-fill" data-value="60"></div>
+                </div>
+                <small>Status: Needs practice</small>
+            </div>
+
+        </div>
+
+        <div class="overall-score">
+            ⭐ Overall Performance: <b>70%</b><br>
+            Keep practicing to improve consistency.
+        </div>
+    `;
+
+    // animate bars
+    setTimeout(() => {
+        document.querySelectorAll(".progress-fill").forEach(bar => {
+            bar.style.width = bar.getAttribute("data-value") + "%";
+        });
+    }, 100);
+}
+function updateSubjects(){
+    const cls = document.getElementById("classSelect").value;
+    const subjectSelect = document.getElementById("subjectSelect");
+    subjectSelect.innerHTML = `<option value="">-- Select Subject --</option>`;
+
+    if(!cls) return;
+
+    classData[cls].subjects.forEach(sub=>{
+        subjectSelect.innerHTML += `<option value="${sub}">${sub}</option>`;
+    });
+
+    document.getElementById("facultyInfo").innerHTML = "";
+}
+
+function updateFaculty(){
+    const cls = document.getElementById("classSelect").value;
+    const sub = document.getElementById("subjectSelect").value;
+
+    if(!cls || !sub) return;
+
+    const teacher = classData[cls].faculty[sub];
+    document.getElementById("facultyInfo").innerHTML =
+        `👨‍🏫 Faculty Assigned: <span style="color:#00ffd5">${teacher}</span>`;
+}
+
+
+
+function toggleChat(){chatbot.classList.toggle("hidden")}
+function sendMsg(){
+chatBody.innerHTML+=`<div>You: ${chatInput.value}</div>`;
+chatBody.innerHTML+=`<div style="color:#00ffd5">AI: Please specify subject.</div>`;
+chatInput.value="";
+}
+</script>
+
+</body>
+</html>
